@@ -1,5 +1,10 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    encoders:
+        App\Entity\User:
+            algorithm: argon2i
+            cost: 30
+
     providers:
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
@@ -19,6 +24,10 @@ security:
             logout:
                 path: app_logout
 
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 2592000
+
             # activate different ways to authenticate
 
             # http_basic: true
@@ -30,5 +39,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        # - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - { path: ^/change-password, roles: IS_AUTHENTICATED_FULLY }
+        # - { path: ^/, roles: IS_AUTHENTICATED_REMEMBERED }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
