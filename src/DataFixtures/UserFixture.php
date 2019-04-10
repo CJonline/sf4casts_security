@@ -31,6 +31,10 @@ class UserFixture extends BaseFixture
                 'engage'
             ));
 
+            if ($this->faker->boolean) {
+                $user->setTwitterUsername($this->faker->userName);
+            }
+
             return $user;
         });
 
@@ -43,6 +47,10 @@ class UserFixture extends BaseFixture
                 $user,
                 'engage'
             ));
+
+            if ($this->faker->boolean) {
+                $user->setTwitterUsername($this->faker->userName);
+            }
 
             return $user;
         });
